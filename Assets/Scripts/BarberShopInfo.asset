@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bad73686ec1b048aa096b11faed738, type: 3}
   m_Name: BarberShopInfo
   m_EditorClassIdentifier: 
-  Levels: []
+  Title: Barber Shop
+  Levels:
+  - UpgradeCost: 1000
+    IncomePerCustomer: 100
+  - UpgradeCost: 2000
+    IncomePerCustomer: 200
+  - UpgradeCost: 3000
+    IncomePerCustomer: 300

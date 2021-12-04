@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6734081427013463651}
   - component: {fileID: 6295133327755938220}
   m_Layer: 0
-  m_Name: Customer
+  m_Name: Customer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,10 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e057e5cb52961d49bdd1635ffe42d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  _currentWaypointIndex: 0
+  _waypoints: []
 --- !u!1 &6870814424329271033
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +127,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 85f7c73ae23f0dc4baed0551bac0c9e1, type: 2}
+  - {fileID: 2100000, guid: 4b5023bc6c10ea54abdd596638824308, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

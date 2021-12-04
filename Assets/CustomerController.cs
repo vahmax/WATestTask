@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class CustomerController : MonoBehaviour
 {
 	[SerializeField]
+	[HideInInspector]
 	private Transform[] _waypoints;
 
 	private NavMeshAgent _agent;
