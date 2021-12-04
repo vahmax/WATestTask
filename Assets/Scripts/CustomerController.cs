@@ -17,6 +17,12 @@ public class CustomerController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
 	}
 
+	private void Start()
+	{
+		if (_waypoints.Length > 0)
+			_agent.SetDestination(_waypoints[0].position);		
+	}
+
 	void Update()
     {
 		if (IsWaypointReached)

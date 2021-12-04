@@ -1,25 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class Building : MonoBehaviour
 {
+    public UnityEvent<int> OnCustomerServed;
+
     [SerializeField]
     private BuildingInfo _info;
 
-    [SerializeField]
-    private GameObject _interactivePoint;
-
     private int _currentLevel;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void UpgradeLevel()
 	{
@@ -31,6 +21,11 @@ public class Building : MonoBehaviour
 		}
 
         _currentLevel += 1;
+	}
+
+    public void HandleCustomerPayment()
+	{
+        OnCustomerServed?.Invoke(_info.Levels[_currentLevel].IncomePerCustomer);
 	}
 
     private bool IsMaximumLevel => _currentLevel == _info.Levels.Length - 1;
