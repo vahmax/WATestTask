@@ -29,14 +29,29 @@ public class CustomerSpawner : MonoBehaviour
 	{
         while (true)
 		{
-            var customer = _customers[Random.Range(0, _customers.Length)];
-            Instantiate(customer, transform.position, Quaternion.identity);
-            
-            var controller = customer.GetComponent<CustomerController>();
-            var way = _ways[Random.Range(0, _ways.Length)];
-            controller.Init(way.Points);
+            var customer = GetRandomCustomer();
 
+            Instantiate(customer, transform.position, Quaternion.identity);
+            InitCustomer(customer);
+            
             yield return new WaitForSeconds(_spawnInterval);
         }
 	}
+
+    private void InitCustomer(GameObject customer)
+	{
+        var controller = customer.GetComponent<CustomerController>();
+
+        controller.Init(GetRandomWaypoints());
+    }
+
+    private GameObject GetRandomCustomer()
+    {
+        return _customers[Random.Range(0, _customers.Length)];
+    }
+
+    private Transform[] GetRandomWaypoints()
+	{
+        return _ways[Random.Range(0, _ways.Length)].Points;
+    }
 }
