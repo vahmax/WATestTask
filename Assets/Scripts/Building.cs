@@ -13,27 +13,13 @@ public class Building : MonoBehaviour
 
 	private int _currentLevel;
 
+	public bool HasMaximumLevel => _currentLevel == _info.Levels.Length - 1;
+
 	public void UpgradeLevel()
 	{
-		if (IsMaximumLevel)
-		{
-			Debug.Log("Building level is maximum already :)");
-
-			return;
-		}
-
-		if (HasEnoughMoney == false)
-		{
-			Debug.Log("You don't have enough money :(");
-
-			return;
-		}
-
-		BalanceManager.Instance.SpendCoins(_info.Levels[_currentLevel].UpgradeCost);
-
 		_currentLevel += 1;
 
-		OnBuildingUpgraded?.Invoke(CreateBuildingInfo());
+		OnBuildingUpgraded?.Invoke(GetBuildingInfo());
 	}
 
 	public void HandleCustomerPayment()
@@ -43,10 +29,10 @@ public class Building : MonoBehaviour
 
 	public void HandleClick()
 	{
-		OnBuildingClicked?.Invoke(CreateBuildingInfo());
+		OnBuildingClicked?.Invoke(GetBuildingInfo());
 	}
 
-	private BuildingPopupPresenter.CurrentBuildingInfo CreateBuildingInfo()
+	public BuildingPopupPresenter.CurrentBuildingInfo GetBuildingInfo()
 	{
 		return new BuildingPopupPresenter.CurrentBuildingInfo
 		{
@@ -55,8 +41,4 @@ public class Building : MonoBehaviour
 			CurrentLevel = _currentLevel,
 		};
 	}
-
-	private bool HasEnoughMoney => BalanceManager.Instance.Amount >= _info.Levels[_currentLevel].UpgradeCost;
-
-	private bool IsMaximumLevel => _currentLevel == _info.Levels.Length - 1;
 }

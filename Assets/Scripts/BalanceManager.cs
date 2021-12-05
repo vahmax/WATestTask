@@ -23,17 +23,26 @@ public class BalanceManager : MonoBehaviour
 
 	public void AddCoins(int amount)
 	{
+		Debug.Log(amount);
+
 		_balance += amount;
 
 		OnBalanceChanged?.Invoke(_balance);
 	}
 
-	public void SpendCoins(int amount)
+	public bool TrySpendCoins(int amount)
 	{
+		if (amount > _balance)
+		{
+			Debug.Log("You don't have enough money :(");
+
+			return false;
+		}
+
 		_balance -= amount;
 
 		OnBalanceChanged?.Invoke(_balance);
-	}
 
-	public int Amount => _balance;
+		return true;
+	}
 }
