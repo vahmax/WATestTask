@@ -27,8 +27,8 @@ public class CustomerSpawner : MonoBehaviour
 		{
             var customer = GetRandomCustomer();
 
-            Instantiate(customer, transform.position, Quaternion.identity);
             InitCustomer(customer);
+            Instantiate(customer, transform.position, Quaternion.identity);
             
             yield return new WaitForSeconds(_spawnInterval);
         }
@@ -37,7 +37,6 @@ public class CustomerSpawner : MonoBehaviour
     private void InitCustomer(GameObject customer)
 	{
         var controller = customer.GetComponent<CustomerController>();
-
         controller.Init(GetRandomWaypoints());
     }
 

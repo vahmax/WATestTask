@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,15 +13,14 @@ public class CustomerController : MonoBehaviour
 	private NavMeshAgent _agent;
 	private int _currentWaypointIndex;
 
+	public CustomerController(Transform[] waypoints)
+	{
+		_waypoints = waypoints;
+	}
+
 	void Awake()
 	{
         _agent = GetComponent<NavMeshAgent>();
-	}
-
-	private void Start()
-	{
-		if (_waypoints.Length > 0)
-			_agent.SetDestination(_waypoints[0].position);		
 	}
 
 	void Update()
@@ -50,3 +50,4 @@ public class CustomerController : MonoBehaviour
 
     private bool IsWaypointReached => !_agent.pathPending && (_agent.remainingDistance <= _agent.stoppingDistance);
 }
+ 
