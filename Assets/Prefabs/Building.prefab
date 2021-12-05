@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6823575803835189022}
   - component: {fileID: 7033190678536507650}
+  - component: {fileID: 5529094696841734626}
   m_Layer: 0
   m_Name: Interactive Point
   m_TagString: Untagged
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58979445199454616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 1, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 2}
+  m_LocalPosition: {x: 1.5, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 2104440189557640895}
   m_RootOrder: 1
@@ -44,6 +45,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5529094696841734626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58979445199454616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858c7621ecdeec74e979cd7c36f563ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCustomerPayment:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8459463873339597206}
+        m_TargetAssemblyTypeName: Building, Assembly-CSharp
+        m_MethodName: HandleCustomerPayment
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1966370457130606119
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +84,7 @@ GameObject:
   - component: {fileID: 1820019622161306013}
   - component: {fileID: 4572032077545562236}
   - component: {fileID: 7066601448312840181}
+  - component: {fileID: 2103703980446982791}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -71,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966370457130606119}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 2104440189557640895}
@@ -139,6 +168,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2103703980446982791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966370457130606119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d928acbb326ff845af58201d83e70b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8459463873339597206}
+        m_TargetAssemblyTypeName: Building, Assembly-CSharp
+        m_MethodName: HandleClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3494470339042060612
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnCustomerServed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildingClicked:
     m_PersistentCalls:
       m_Calls: []
   _info: {fileID: 0}

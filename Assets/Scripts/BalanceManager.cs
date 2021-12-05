@@ -8,9 +8,17 @@ public class BalanceManager : MonoBehaviour
 
     public UnityEvent<int> OnBalanceChanged;
 
-	private void Start()
+	public static BalanceManager Instance = null;
+
+	void Awake()
 	{
-		_balance = 0;
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+		else if (Instance == this) {
+			Destroy(gameObject);
+		}
 	}
 
 	public void AddCoins(int amount)
@@ -19,4 +27,13 @@ public class BalanceManager : MonoBehaviour
 
 		OnBalanceChanged?.Invoke(_balance);
 	}
+
+	public void SpendCoins(int amount)
+	{
+		_balance -= amount;
+
+		OnBalanceChanged?.Invoke(_balance);
+	}
+
+	public int Amount => _balance;
 }
