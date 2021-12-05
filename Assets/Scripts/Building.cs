@@ -36,8 +36,8 @@ public class Building : MonoBehaviour
 	{
 		return new BuildingPopupPresenter.CurrentBuildingInfo
 		{
-			Info = _info,
-			Building = this,
+			Details = _info,
+			Script = this,
 			CurrentLevel = _currentLevel,
 		};
 	}

@@ -23,8 +23,6 @@ public class BalanceManager : MonoBehaviour
 
 	public void AddCoins(int amount)
 	{
-		Debug.Log(amount);
-
 		_balance += amount;
 
 		OnBalanceChanged?.Invoke(_balance);

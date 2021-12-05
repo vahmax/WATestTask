@@ -1098,7 +1098,9 @@ MonoBehaviour:
   _titleTextbox: {fileID: 7170696518387878535}
   _levelTextbox: {fileID: 348892104380230626}
   _incomeTextbox: {fileID: 6411562731070997972}
+  _upgradeTextbox: {fileID: 449776535722151455}
   _upgradeCostTextbox: {fileID: 6593829422084131095}
+  _upgradeButton: {fileID: 5889059658890814262}
 --- !u!1 &7486702412553691836
 GameObject:
   m_ObjectHideFlags: 0

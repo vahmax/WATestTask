@@ -6,22 +6,21 @@ public class BuildingPopupPresenter : MonoBehaviour
 {
     public class CurrentBuildingInfo
 	{
-        public Building Building;
-        public BuildingInfo Info;
+        public Building Script;
+        public BuildingInfo Details;
         public int CurrentLevel;
 	}
 
-    [SerializeField]
-    private Text _titleTextbox;
+    [Header("Text Boxes")]
+    [SerializeField] private Text _titleTextbox;
+    [SerializeField] private Text _levelTextbox;
+    [SerializeField] private Text _incomeTextbox;
 
-    [SerializeField]
-    private Text _levelTextbox;
+    [SerializeField] private Text _upgradeTextbox;
+    [SerializeField] private Text _upgradeCostTextbox;
 
-    [SerializeField]
-    private Text _incomeTextbox;
-
-    [SerializeField]
-    private Text _upgradeCostTextbox;
+    [Header("Buttons")]
+    [SerializeField] private Button _upgradeButton;
 
     private Building _building;
 
@@ -40,15 +39,13 @@ public class BuildingPopupPresenter : MonoBehaviour
         gameObject.SetActive(true);
 	}
 
-    public void DrawBuildingInfo(CurrentBuildingInfo dto)
+    public void DrawBuildingInfo(CurrentBuildingInfo info)
 	{
-        _titleTextbox.text = dto.Info.Title;
-        _levelTextbox.text = $"{dto.CurrentLevel + 1}";
-        _incomeTextbox.text = dto.Info.Levels[dto.CurrentLevel].IncomePerCustomer.ToString();
-        _upgradeCostTextbox.text = dto.Info.Levels[dto.CurrentLevel].UpgradeCost.ToString();
+         _building = info.Script;
 
-        _building = dto.Building;
-
+        DrawCurrentInfo(info);
+        DrawUpgradeInfo(info);
+        
         Show();
     }
 
@@ -61,7 +58,7 @@ public class BuildingPopupPresenter : MonoBehaviour
 		}
 
         var building = _building.GetBuildingInfo();
-        var cost = building.Info.Levels[building.CurrentLevel].UpgradeCost;
+        var cost = building.Details.Levels[building.CurrentLevel].UpgradeCost;
 
         if (BalanceManager.Instance.TrySpendCoins(cost) == false)
 		{
@@ -70,4 +67,27 @@ public class BuildingPopupPresenter : MonoBehaviour
 
         _building.UpgradeLevel();
 	}
+
+    private void DrawCurrentInfo(CurrentBuildingInfo info)
+	{
+        _titleTextbox.text = info.Details.Title;
+        _levelTextbox.text = $"{info.CurrentLevel + 1}";
+        _incomeTextbox.text = info.Details.Levels[info.CurrentLevel].UpgradeCost.ToString();
+	}
+
+    private void DrawUpgradeInfo(CurrentBuildingInfo info)
+	{
+        if (_building.HasMaximumLevel)
+		{
+            _upgradeTextbox.text = "Max";
+            _upgradeCostTextbox.text = string.Empty;
+            _upgradeButton.enabled = false;
+
+            return;
+		}
+
+        _upgradeTextbox.text = "Level Up";
+        _upgradeCostTextbox.text = info.Details.Levels[info.CurrentLevel].UpgradeCost.ToString();
+        _upgradeButton.enabled = true;
+    }
 }
