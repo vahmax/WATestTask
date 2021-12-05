@@ -11,15 +11,11 @@ public class CustomerSpawner : MonoBehaviour
         public Transform[] Points;
     }
 
-    [SerializeField]
-    private GameObject[] _customers;
 
-    [SerializeField]
-    private Way[] _ways;
-
-    [SerializeField]
-    private float _spawnInterval = 1;
-
+    [SerializeField] private GameObject[] _customers;
+    [SerializeField] private Way[] _ways;
+    [SerializeField] private float _spawnInterval = 1;
+    
     void Start()
     {
         StartCoroutine(SpawnCustomer());

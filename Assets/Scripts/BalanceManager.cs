@@ -6,9 +6,17 @@ public class BalanceManager : MonoBehaviour
 {
     private int _balance;
 
-    public UnityEvent<int> OnBalanceChanged;
+	[Header("Messages")]
+	[SerializeField] private string NotEnoughMoney = "You don't have enough money :(";
+
+	[Space]
+
+	[Header("Events")]
+	public UnityEvent<int> OnBalanceChanged;
 
 	public static BalanceManager Instance = null;
+
+	public int Amount => _balance;
 
 	void Awake()
 	{
@@ -19,6 +27,8 @@ public class BalanceManager : MonoBehaviour
 		else if (Instance == this) {
 			Destroy(gameObject);
 		}
+
+		OnBalanceChanged?.Invoke(0);
 	}
 
 	public void AddCoins(int amount)
@@ -32,7 +42,7 @@ public class BalanceManager : MonoBehaviour
 	{
 		if (amount > _balance)
 		{
-			Debug.Log("You don't have enough money :(");
+			Debug.LogWarning(NotEnoughMoney);
 
 			return false;
 		}
