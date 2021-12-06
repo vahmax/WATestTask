@@ -4,14 +4,6 @@ using UnityEngine.UI;
 
 public class BuildingPopupPresenter : MonoBehaviour
 {
-    public class CurrentBuildingInfo
-	{
-        public Building Script;
-        public BuildingInfo Details;
-        public int CurrentLevel;
-	}
-
-
     [Header("Text Boxes")]
     [SerializeField] private Text _titleTextbox;
     [SerializeField] private Text _levelTextbox;
@@ -56,7 +48,7 @@ public class BuildingPopupPresenter : MonoBehaviour
         BalanceManager.Instance.OnBalanceChanged.AddListener(DrawUpgradeAvailability);
     }
 
-    public void DrawBuildingInfo(CurrentBuildingInfo info)
+    public void DrawBuildingInfo(Building.CurrentBuildingInfo info)
 	{
          _building = info.Script;
 
@@ -101,14 +93,14 @@ public class BuildingPopupPresenter : MonoBehaviour
         }
 	}
 
-    private void DrawCurrentInfo(CurrentBuildingInfo info)
+    private void DrawCurrentInfo(Building.CurrentBuildingInfo info)
 	{
         _titleTextbox.text = info.Details.Title;
         _levelTextbox.text = $"{info.CurrentLevel + 1}";
         _incomeTextbox.text = info.Details.Levels[info.CurrentLevel].IncomePerCustomer.ToString();
 	}
 
-    private void DrawUpgradeInfo(CurrentBuildingInfo info)
+    private void DrawUpgradeInfo(Building.CurrentBuildingInfo info)
 	{
         if (_building.HasMaximumLevel)
 		{

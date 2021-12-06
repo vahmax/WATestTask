@@ -3,15 +3,12 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 
-public class Clickable : MonoBehaviour
+public class Clickable : MonoBehaviour, IPointerDownHandler
 {
 	public UnityEvent OnClicked;
 
-	private void OnMouseDown()
+	public void OnPointerDown(PointerEventData eventData)
 	{
-		if (EventSystem.current.IsPointerOverGameObject())
-			return;
-
 		OnClicked?.Invoke();
 	}
 }

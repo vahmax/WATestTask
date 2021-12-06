@@ -14,7 +14,7 @@ public class BalanceManager : MonoBehaviour
 	[Header("Events")]
 	public UnityEvent<int> OnBalanceChanged;
 
-	public static BalanceManager Instance = null;
+	public static BalanceManager Instance { get; private set; }
 
 	public int Amount => _balance;
 

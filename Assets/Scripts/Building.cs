@@ -4,13 +4,21 @@ using UnityEngine.Events;
 
 public class Building : MonoBehaviour
 {
+	public class CurrentBuildingInfo
+	{
+		public Building Script;
+		public BuildingInfo Details;
+		public int CurrentLevel;
+	}
+
+
 	[Header("Messages")]
 	[SerializeField] private string HasMaximumLevelAlready = "This building has maximum level already :)";
 
 	[Header("Events")]
 	public UnityEvent<int> OnCustomerServed;
-	public UnityEvent<BuildingPopupPresenter.CurrentBuildingInfo> OnBuildingUpgraded;
-	public UnityEvent<BuildingPopupPresenter.CurrentBuildingInfo> OnBuildingClicked;
+	public UnityEvent<CurrentBuildingInfo> OnBuildingUpgraded;
+	public UnityEvent<CurrentBuildingInfo> OnBuildingClicked;
 
 	[SerializeField] private BuildingInfo _info;
 
@@ -44,9 +52,9 @@ public class Building : MonoBehaviour
 		OnBuildingClicked?.Invoke(GetBuildingInfo());
 	}
 
-	public BuildingPopupPresenter.CurrentBuildingInfo GetBuildingInfo()
+	public CurrentBuildingInfo GetBuildingInfo()
 	{
-		return new BuildingPopupPresenter.CurrentBuildingInfo
+		return new CurrentBuildingInfo
 		{
 			Details = _info,
 			Script = this,
