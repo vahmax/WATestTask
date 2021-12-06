@@ -1,11 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class CustomerController : MonoBehaviour
 {
+	public UnityEvent<CustomerController> OnCustomerLeaved;
+
 	[SerializeField]
 	[HideInInspector]
 	private Transform[] _waypoints;
@@ -34,13 +36,16 @@ public class CustomerController : MonoBehaviour
 	public void Init(Transform[] waypoints)
 	{
 		_waypoints = waypoints;
+		_currentWaypointIndex = 0;
+
+		GoToNextWaypoint();
 	}
 
 	private void GoToNextWaypoint()
 	{
 		if (_currentWaypointIndex == _waypoints.Length)
 		{
-			Destroy(gameObject);
+			OnCustomerLeaved?.Invoke(this);
 			return;
 		}
 

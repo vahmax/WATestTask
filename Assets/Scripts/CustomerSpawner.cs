@@ -1,7 +1,5 @@
-using System.Collections;
-
 using UnityEngine;
-
+using UnityEngine.Pool;
 
 public class CustomerSpawner : MonoBehaviour
 {
@@ -14,31 +12,59 @@ public class CustomerSpawner : MonoBehaviour
 
     [SerializeField] private GameObject[] _customers;
     [SerializeField] private Way[] _ways;
+
+    [Header("Spawner Settings")]
     [SerializeField] private float _spawnInterval = 1;
-    
-    void Start()
+
+    private ObjectPool<GameObject> _pool;
+
+	private void Awake()
+	{
+        _pool = new ObjectPool<GameObject>(
+                    CreateCustomer,
+                    InitCustomer,
+                    ReleaseCustomer,
+                    poolObject => Destroy(poolObject)
+                );
+	}
+
+	void Start()
     {
-        StartCoroutine(SpawnCustomer());
+        InvokeRepeating(nameof(SpawnCustomer), 0, _spawnInterval);
     }
 
-	private IEnumerator SpawnCustomer()
+    private void SpawnCustomer()
 	{
-        while (true)
-		{
-            var customer = GetRandomCustomer();
-
-            InitCustomer(customer);
-            Instantiate(customer, transform.position, Quaternion.identity);
-            
-            yield return new WaitForSeconds(_spawnInterval);
-        }
+        _pool.Get();
 	}
+
+	private GameObject CreateCustomer()
+	{
+        return Instantiate(GetRandomCustomer(), transform);
+    }
 
     private void InitCustomer(GameObject customer)
 	{
         var controller = customer.GetComponent<CustomerController>();
+        controller.OnCustomerLeaved.AddListener(HandleCustomerLeaving);
+
+        customer.transform.position = transform.position;
+        customer.SetActive(true);
+
         controller.Init(GetRandomWaypoints());
     }
+
+    private void ReleaseCustomer(GameObject customer)
+	{
+        customer.SetActive(false);
+    }
+
+    private void HandleCustomerLeaving(CustomerController customerController)
+	{
+        customerController.OnCustomerLeaved.RemoveListener(HandleCustomerLeaving);
+
+        _pool.Release(customerController.gameObject);
+	}
 
     private GameObject GetRandomCustomer()
     {
